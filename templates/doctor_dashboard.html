@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="padding: 50px;">
+    <img src="{{ user.profile_picture.url }}" width="100">
+    <h2>Welcome, Dr. {{ user.first_name }} {{ user.last_name }}</h2>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Address: {{ user.address_line1 }}, {{ user.city }}, {{ user.state }} - {{ user.pincode }}</p>
+    
+</div>
+{% endblock %}
