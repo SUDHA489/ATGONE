@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h2>Create a New Blog Post</h2>
+        <p style="color: #555; margin-bottom: 20px;">Share your knowledge and insights with others.</p>
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="title"><strong>Title:</strong></label>
+                <input type="text" id="title" name="title" placeholder="Enter blog title" required />
+            </div>
+
+            <div class="form-group">
+                <label for="category"><strong>Category:</strong></label>
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="mental_health">Mental Health</option>
+                    <option value="heart_disease">Heart Disease</option>
+                    <option value="covid19">Covid19</option>
+                    <option value="immunization">Immunization</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="summary"><strong>Summary:</strong></label>
+                <textarea id="summary" name="summary" placeholder="Write a short summary (max 100 words)" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="content"><strong>Content:</strong></label>
+                <textarea id="content" name="content" placeholder="Write your full blog content here" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image"><strong>Upload Image:</strong></label>
+                <input type="file" id="image" name="image" accept="image/*" required />
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label for="is_draft"><strong>Save as Draft:</strong></label>
+                <input type="checkbox" id="is_draft" name="is_draft" />
+            </div>
+
+            <button type="submit">Publish</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        width: 120px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        flex: 1;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    .checkbox-group label {
+        width: auto;
+        margin-right: 10px;
+    }
+
+    .checkbox-group input {
+        width: auto;
+    }
+</style>
+{% endblock %}

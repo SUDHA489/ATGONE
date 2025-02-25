@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATG</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #9ac3ec;
+            color: white;
+            padding: 15px 15px;
+            margin-bottom: 25px;
+        }
+        
+        /* Website Name */
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        /* Profile Icon */
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: white;
+            width: 180px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: none;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+        
+        .dropdown p {
+            color: rgb(218, 102, 102);
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .dropdown a {
+            text-decoration: none;
+            color: black;
+            padding: 10px;
+            display: block;
+        }
+        
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        /* Show dropdown */
+        .show {
+            display: flex;
+        }
+        .pro{
+            border: 2px solid rgb(203, 126, 126);
+            margin: auto;
+            max-width: 260px;
+            max-height: 300px;
+            padding: 40px;
+            margin-top: 140px;
+            background-color: lightgreen;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .blog-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .blog-card h2 {
+            margin: 0;
+            color: #333;
+        }
+        .blog-card p {
+            color: #666;
+        }
+        .blog-card .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .blog-card .read-more:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("profileDropdown").classList.toggle("show");
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function (event) {
+            if (!event.target.matches('.profile-icon')) {
+                let dropdown = document.getElementById("profileDropdown");
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">Across The Globe</div>
+        <div class="profile">
+            <img src="https://th.bing.com/th/id/OIP.yeUOBcuzfa3yTo1uVdQ1rAHaHa?rs=1&pid=ImgDetMain" 
+                 alt="Profile" class="profile-icon" onclick="toggleDropdown()">
+            <div class="dropdown" id="profileDropdown">
+                {% if user.user_type == "doctor" %}
+                    <a href="{% url 'createblog' %}">Create Blog</a>
+                    <a href="{% url 'view_blogs' %}?my=true">My Blogs</a>
+                    <a href="{% url 'view_blogs' %}">All Blogs</a>
+                {% else %}
+                    <a href="{% url 'view_blogs' %}">Blogs</a>
+                {% endif %}
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

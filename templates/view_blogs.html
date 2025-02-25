@@ -1,0 +1,15 @@
+{% extends 'profile.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ heading }}</h1> 
+    {% for blog in blogs %}
+    <div class="blog-card">
+        <h2>{{ blog.title }}</h2>
+        <p>{{ blog.summary }}</p>
+    </div>
+    {% empty %}
+    <p>No blogs found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
