@@ -1,0 +1,106 @@
+{% extends "profile.html" %}
+
+{% block content %}
+<div class="appointments-container">
+    <h2>Your Appointments</h2>
+
+    {% if user.user_type == "doctor" %}
+        <h3>Appointments with Patients</h3>
+    {% else %}
+        <h3>Your Booked Appointments</h3>
+    {% endif %}
+
+    <table class="appointments-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                {% if user.user_type == "doctor" %}
+                    <th>Patient Name</th>
+                {% else %}
+                    <th>Doctor</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.start_time }} - {{ appointment.end_time }}</td>
+                {% if user.user_type == "doctor" %}
+                    <td>{{ appointment.patient.username }}</td>
+                {% else %}
+                    <td>
+                        <div class="doctor-info">
+                            <img src="{{ appointment.doctor.profile_picture.url }}" alt="Doctor's Profile" class="doctor-img">
+                            <span>{{ appointment.doctor.get_full_name }}</span>
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No appointments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .appointments-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h2, h3 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .appointments-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .appointments-table th, .appointments-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .appointments-table th {
+        background: #007bff;
+        color: white;
+    }
+
+    .appointments-table tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+
+    .appointments-table tr:hover {
+        background: #f1f1f1;
+    }
+
+    .doctor-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .doctor-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+    }
+</style>
+
+{% endblock %}

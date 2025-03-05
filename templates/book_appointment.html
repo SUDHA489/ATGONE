@@ -1,0 +1,81 @@
+{% extends "profile.html" %}
+{% block content %}
+<div class="appointment-container">
+    <h2>Book Appointment with Dr. {{ doctor.get_full_name }}</h2>
+    <form method="post" class="appointment-form">
+        {% csrf_token %}
+        
+        <label>Required Specialty:</label>
+        <input type="text" name="specialty" required>
+
+        <label>Appointment Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Start Time:</label>
+        <input type="time" name="start_time" required>
+
+        <button type="submit">Confirm</button>
+    </form>
+</div>
+
+<style>
+    .appointment-container {
+        max-width: 400px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .appointment-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+        text-align: left;
+        display: block;
+        margin: 10px 0 5px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+</style>
+
+{% endblock %}

@@ -140,8 +140,11 @@
                     <a href="{% url 'createblog' %}">Create Blog</a>
                     <a href="{% url 'view_blogs' %}?my=true">My Blogs</a>
                     <a href="{% url 'view_blogs' %}">All Blogs</a>
+                    <a href="{% url 'user_appointments'%}">My Appointments</a>
                 {% else %}
                     <a href="{% url 'view_blogs' %}">Blogs</a>
+                    <a href="{% url 'list_doctors' %}">Book Appointment</a>
+                    <a href="{% url 'user_appointments'%}"> My Bookings</a>
                 {% endif %}
                 <a href="{% url 'logout' %}">Logout</a>
             </div>

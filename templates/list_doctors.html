@@ -1,0 +1,75 @@
+{% extends "profile.html" %}
+{% block content %}
+<h2 style="text-align: center; margin-bottom: 20px; color: #333;">Available Doctors</h2>
+
+<div class="doctor-container">
+    {% for doctor in doctors %}
+    <div class="doctor-card">
+        <img src="{{ doctor.profile_picture.url }}" alt="Doctor's Profile" class="doctor-img">
+        <h3>{{ doctor.get_full_name }}</h3>
+        <a href="{% url 'book_appointment' doctor.id %}" class="btn">Book Appointment</a>
+    </div>
+    {% empty %}
+    <p class="no-doctors">No doctors available.</p>
+    {% endfor %}    
+</div>
+
+<style>
+    .doctor-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .doctor-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .doctor-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .doctor-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border: 3px solid #007bff;
+    }
+
+    h3 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        display: inline-block;
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+        background: #0056b3;
+    }
+
+    .no-doctors {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+    }
+</style>
+
+{% endblock %}

@@ -9,4 +9,8 @@ urlpatterns = [
     path("blog/create/", create_blog, name="createblog"),
     path("blogs/", view_blogs, name="view_blogs"),
     path('logout/', logout_view, name='logout'),
+    path("doctors/", list_doctors, name="list_doctors"),
+    path("book_appointment/<int:doctor_id>/", book_appointment, name="book_appointment"),
+    path("appointments/", user_appointments, name="user_appointments"),
+
 ]
